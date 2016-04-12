@@ -1,6 +1,5 @@
 # https://sites.google.com/site/prologsite/prolog-problems/1
-# 1.08 (**) Eliminate consecutive duplicates of list elements.
-# http://stackoverflow.com/questions/1011938/python-previous-and-next-values-inside-a-loop
+# 1.09 (**) Pack consecutive duplicates of list elements into sublists.
 
 from itertools import *
 
@@ -18,15 +17,23 @@ def prev_and_next(some_iterable):
     
 
 def main():
-    mylist = [1, 2, 3, 3, 'a', 'd', 'd', 5, 3, 5, 1, 1]
+    mylist = ['q', 1, 2, 3, 3, 'a', 'd', 'd', 5, 3, 5, 1, 1]
 
     newlist = []
+    tmplist = []
     for elem in mylist:
         try:
-            if newlist[-1] != elem:
-                newlist.append(elem)
+            if(tmplist[-1] == elem):
+                tmplist.append(elem)
+            else:
+                if(len(tmplist) > 1):
+                    newlist.append(tmplist)
+                else:
+                    print('last')
+                    newlist.append(tmplist[-1])
+                tmplist = []
         except IndexError:
-            newlist.append(elem)
+            tmplist.append(elem)
 
     print(newlist)
 
